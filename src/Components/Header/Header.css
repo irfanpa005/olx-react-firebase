@@ -148,6 +148,10 @@
   color: #002f34;
 }
 
+.signOutButton:hover{
+  cursor: pointer;
+}
+
 /* .sellMenu .sellMenuContent svg {
   align-items: center;
 } */

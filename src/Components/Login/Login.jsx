@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { firebaseContext } from '../../context/firebaseContext';
 import Logo from '../../olx-logo.png';
 import './Login.css';
 import { signInWithEmailAndPassword } from "firebase/auth";

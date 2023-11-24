@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Logo from '../../olx-logo.png';
 import './Signup.css';
 import { useContext } from 'react';
-import { firebaseContext } from '../../context/firebaseContext';
+import { FirebaseContext } from '../../context/Context';
 import { auth } from '../../firebase/firebaseConfig';
 import {  collection, addDoc, getFirestore} from "firebase/firestore"; 
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
@@ -14,7 +14,7 @@ export default function Signup() {
   const [phoneNo, setPhoneNo] = useState('');
   const [password, setPassword] = useState('');
 
-  const {firebaseApp} = useContext(firebaseContext);
+  const {firebaseApp} = useContext(FirebaseContext);
   const database = getFirestore(firebaseApp);
   const userCollectionRef = collection(database,'users');
 
