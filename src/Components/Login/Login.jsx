@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Logo from '../../olx-logo.png';
 import './Login.css';
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -9,13 +9,12 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigateTo = useNavigate();
-
+  
   const handleLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
-        const user = userCredential.user;
         navigateTo('/home');
         // ...
       })
@@ -41,6 +40,7 @@ function Login() {
             id="email"
             name="email"
             placeholder="email address"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <br />
@@ -52,6 +52,7 @@ function Login() {
             id="password"
             name="password"
             placeholder="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
