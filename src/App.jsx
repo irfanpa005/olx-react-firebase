@@ -11,11 +11,11 @@ import { onAuthStateChanged } from "firebase/auth";
 
 function App() {
 
-  const {setUser} = useContext(AuthContext);
+  const {user, setUser} = useContext(AuthContext);
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user)
+    onAuthStateChanged(auth, (userLogged) => {
+      if (userLogged) {
+        setUser(userLogged)
       } 
     });
   })

@@ -10,10 +10,10 @@ import { signOut } from "firebase/auth";
 import { auth } from '../../firebase/firebaseConfig';
 import { useNavigate } from "react-router-dom";
 
+
 function Header() {
-  const {user} = useContext(AuthContext);
+  const {user, setUser} = useContext(AuthContext);
   const navigateTo = useNavigate();
-  console.log(user)
 
   return (
     <div className="headerParentDiv">
