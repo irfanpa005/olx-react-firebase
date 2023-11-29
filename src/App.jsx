@@ -8,6 +8,8 @@ import CreatePage from './Pages/Create'
 import { AuthContext } from './context/Context'
 import { auth } from './firebase/firebaseConfig'
 import { onAuthStateChanged } from "firebase/auth";
+import ViewPost from './Pages/ViewPost'
+import { Post } from './context/PostContext'
 
 function App() {
 
@@ -20,18 +22,20 @@ function App() {
     });
   })
   
-
   return (
     <>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/signup' element={<Signup /> }/>
-        <Route path='/login' element={<LoginPage />}/>
-        <Route path='/home' element={<Home />}/>
-        <Route path='/create' element={<CreatePage />} />
-      </Routes>
-    </BrowserRouter>
+      <Post>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/signup' element={<Signup /> }/>
+            <Route path='/login' element={<LoginPage />}/>
+            <Route path='/home' element={<Home />}/>
+            <Route path='/create' element={<CreatePage />} />
+            <Route path='/view' element={<ViewPost />} />
+          </Routes>
+        </BrowserRouter>
+      </Post>
     </>
   )
 }
