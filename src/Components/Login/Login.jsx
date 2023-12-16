@@ -14,8 +14,9 @@ function Login() {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        console.log(userCredential.user)
         // Signed in 
-        navigateTo('/home');
+        navigateTo('/');
         // ...
       })
       .catch((error) => {
