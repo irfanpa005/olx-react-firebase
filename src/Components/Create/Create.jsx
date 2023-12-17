@@ -11,6 +11,7 @@ const Create = () => {
   const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')
   const [image, setImage] = useState(null)
+  const [featured, setFeatured] = useState(false)
   // const [imageUrl, setImageUrl] = useState(null)
   const date = new Date();
 
@@ -68,8 +69,9 @@ const Create = () => {
             imageUrl:downloadURL,
             userId:user.uid,
             createdAt:date.toDateString(),
+            featured:featured
           })
-          navigateTo("/home")
+          navigateTo("/")
         } catch (error) {
           console.log(error)
         }
@@ -124,7 +126,21 @@ const Create = () => {
             <br />
             <input type="file" onChange={(e) => {setImage(e.target.files[0])}}/>
             <br />
+            <br />
+            <span className='featureCheck'>
+              <input 
+                className="input"
+                type="checkbox"
+                id="featured"
+                name="featured"
+                placeholder='category'
+                value={featured}
+                onChange={(e) => setFeatured(e.target.checked)}          
+              />
+              <label htmlFor="featured">Featured</label>
+            </span>
             <button className="uploadBtn" onClick={handleSubmit}>upload and Submit</button>
+
         </div>
 
     </Fragment>

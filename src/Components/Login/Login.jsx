@@ -14,7 +14,8 @@ function Login() {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential.user)
+        localStorage.setItem("refreshToken",userCredential.user.refreshToken)
+        localStorage.setItem("userInfo",userCredential.user.uid)
         // Signed in 
         navigateTo('/');
         // ...

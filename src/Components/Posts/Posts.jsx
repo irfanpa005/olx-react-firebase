@@ -5,6 +5,7 @@ import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { firebaseApp } from '../../firebase/firebaseConfig';
 import { PostContext } from '../../context/PostContext';
 import { useNavigate } from "react-router-dom";
+import Featured from '../../assets/Featured';
 
 function Posts() {
   const db = getFirestore(firebaseApp);
@@ -44,7 +45,8 @@ function Posts() {
                 }}
               >
                 <div className="favorite">
-                  <Heart></Heart>
+                {product.featured ? <Featured style={{ alignSelf: 'flex-start' }}></Featured> : <div></div>}
+                  <Heart style={{ alignSelf: 'flex-end' }}></Heart>
                 </div>
                 <div className="image">
                   <img src={product.imageUrl} alt="" />
@@ -67,22 +69,33 @@ function Posts() {
           <span>Fresh recommendations</span>
         </div>
         <div className="cards">
-          <div className="card">
-            <div className="favorite">
-              <Heart></Heart>
-            </div>
-            <div className="image">
-              <img src="../../../Images/R15V3.jpg" alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>10/5/2021</span>
-            </div>
-          </div>
+          {products.map(product => {
+            return (
+              <div
+                className="card"
+                onClick={() => {
+                  setPostDetails(product)
+                  navigateTo("/view")
+                }}
+              >
+                <div className="favorite">
+                  {product.featured ? <Featured style={{ alignSelf: 'flex-start' }}></Featured> : <div></div>}
+                  <Heart style={{ alignSelf: 'flex-end' , right:0}}></Heart>
+                </div>
+                <div className="image">
+                  <img src={product.imageUrl} alt="" />
+                </div>
+                <div className="content">
+                  <p className="rate">&#x20B9; {product.price}</p>
+                  <span className="kilometer">{product.category}</span>
+                  <p className="name"> {product.name}</p>
+                </div>
+                <div className="date">
+                  <span>{product.createdAt}</span>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>

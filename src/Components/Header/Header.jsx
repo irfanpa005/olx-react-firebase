@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './Header.css';
 import OlxLogo from '../../assets/OlxLogo';
 import Search from '../../assets/Search';
@@ -13,7 +13,26 @@ import { useNavigate } from "react-router-dom";
 
 function Header() {
   const {user, setUser} = useContext(AuthContext);
+  const [searchKey, setSearchKey] = useState("")
   const navigateTo = useNavigate();
+
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+      localStorage.removeItem("refreshToken")
+      localStorage.removeItem("userInfo")
+      navigateTo('/login')
+    }).catch((error) => {
+      console.log(error)
+    });
+  }
+
+  const handleSell= () => {
+    navigateTo('/create')
+  }
+
+  const handleSearch = () => {
+    console.log(searchKey)
+  }
 
   return (
     <div className="headerParentDiv">
@@ -31,9 +50,11 @@ function Header() {
             <input
               type="text"
               placeholder="Find car,mobile phone and more..."
+              value={searchKey}
+              onChange={(e) => setSearchKey(e.target.value)}
             />
           </div>
-          <div className="searchAction">
+          <div className="searchAction" onClick={handleSearch}>
             <Search color="#ffffff"></Search>
           </div>
         </div>
@@ -45,14 +66,8 @@ function Header() {
           <span onClick={() => {navigateTo('/login')}}>{user ? `Welcome,${user.displayName}` : "Login"}</span>
           <hr />
         </div>
-        { user && <span className="signOutButton" onClick={() => {
-          signOut(auth).then(() => {
-            navigateTo('/login')
-          }).catch((error) => {
-            console.log(error)
-          });
-        }}>Logout</span> }
-        <div className="sellMenu">
+        { user && <span className="signOutButton" onClick={handleSignOut}>Logout</span> }
+        <div className="sellMenu" onClick={handleSell}>
           <SellButton></SellButton>
           <div className="sellMenuContent">
             <SellButtonPlus></SellButtonPlus>

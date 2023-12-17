@@ -31,3 +31,14 @@
     border: 2px solid #002f34;
   }
   
+
+.featureCheck input[type="checkbox"],
+.featureCheck label {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.featureCheck input[type="checkbox"]{
+  width: 15px;
+  height: 15px;
+}
