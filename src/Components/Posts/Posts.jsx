@@ -4,6 +4,7 @@ import './Post.css';
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { firebaseApp } from '../../firebase/firebaseConfig';
 import { PostContext } from '../../context/PostContext';
+import { SearchContext } from '../../context/SearchContext';
 import { useNavigate } from "react-router-dom";
 import Featured from '../../assets/Featured';
 
@@ -11,6 +12,7 @@ function Posts() {
   const db = getFirestore(firebaseApp);
   const [products, setProducts] = useState([])
   const {setPostDetails}  = useContext(PostContext);
+  const {searchKey, setSearchKey} = useContext(SearchContext);
   const navigateTo = useNavigate();
 
   useEffect(() => {
@@ -31,6 +33,7 @@ function Posts() {
     <div className="postParentDiv">
       <div className="moreView">
         <div className="heading">
+          {searchKey}
           <span>Quick Menu</span>
           <span>View more</span>
         </div>

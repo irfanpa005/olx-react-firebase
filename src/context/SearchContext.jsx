@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
 
-export const SearchContext = createContext(null);
+export const SearchContext = createContext();
 
-export function Search({children}) {
-    const [searchKey, setSearchKey] = useState(null);
+export function SearchFunction({children}) {
+    const [searchKey, setSearchKey] = useState("");
     return (
         <SearchContext.Provider value={{searchKey, setSearchKey}}>
             {children}

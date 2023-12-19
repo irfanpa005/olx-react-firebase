@@ -6,6 +6,7 @@ import Arrow from '../../assets/Arrow';
 import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
 import { AuthContext } from '../../context/Context';
+import { SearchContext } from '../../context/SearchContext';
 import { signOut } from "firebase/auth";
 import { auth } from '../../firebase/firebaseConfig';
 import { useNavigate } from "react-router-dom";
@@ -13,7 +14,8 @@ import { useNavigate } from "react-router-dom";
 
 function Header() {
   const {user, setUser} = useContext(AuthContext);
-  const [searchKey, setSearchKey] = useState("")
+  const [searchWord, setSearchWord] = useState(null)
+  const {searchKey, setSearchKey} = useContext(SearchContext);
   const navigateTo = useNavigate();
 
   const handleSignOut = () => {
@@ -31,7 +33,7 @@ function Header() {
   }
 
   const handleSearch = () => {
-    console.log(searchKey)
+    setSearchKey(searchWord)
   }
 
   return (
@@ -50,8 +52,8 @@ function Header() {
             <input
               type="text"
               placeholder="Find car,mobile phone and more..."
-              value={searchKey}
-              onChange={(e) => setSearchKey(e.target.value)}
+              value={searchWord}
+              onChange={(e) => setSearchWord(e.target.value)}
             />
           </div>
           <div className="searchAction" onClick={handleSearch}>
