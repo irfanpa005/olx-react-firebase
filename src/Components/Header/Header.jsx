@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 function Header() {
   const {user, setUser} = useContext(AuthContext);
-  const [searchWord, setSearchWord] = useState(null)
+  const [searchWord, setSearchWord] = useState("")
   const {searchKey, setSearchKey} = useContext(SearchContext);
   const navigateTo = useNavigate();
 

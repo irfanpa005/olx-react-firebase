@@ -16,6 +16,7 @@ import ViewPost from './Pages/ViewPost'
 import { Post } from './context/PostContext'
 import PrivateRoute from './utils/PrivateRoute'
 import ErrorPage from './Pages/ErrorPage'
+import { SearchFunction } from './context/SearchContext';
 
 function App() {
 
@@ -65,7 +66,9 @@ function App() {
   return (
     <>
       <Post>
-        <RouterProvider router={router} />
+        <SearchFunction>
+          <RouterProvider router={router} />
+        </SearchFunction>
       </Post>
     </>
   )
