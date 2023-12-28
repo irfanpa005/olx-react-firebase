@@ -26,7 +26,6 @@ const Create = () => {
     const uploadTask = uploadBytesResumable(postImagesRef, image);
     uploadTask.on('state_changed',
       (snapshot) => { console.log(snapshot)
-    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
     console.log('Upload is ' + progress + '% done');
     switch (snapshot.state) {

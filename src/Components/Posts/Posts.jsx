@@ -5,18 +5,26 @@ import { SearchContext } from '../../context/SearchContext';
 import { useNavigate } from "react-router-dom";
 import PostCards from './PostCards';
 import { getAllPosts } from './apis';
+import { getFavourited } from './apis';
+import { AuthContext } from '../../context/Context';
 
 
 function Posts() {
   const [products, setProducts] = useState([])
-  const {setPostDetails}  = useContext(PostContext);
+  const [isFavourited, setIsFavourited] = useState([])
   const {searchKey, setSearchKey} = useContext(SearchContext);
+  const [visiblePosts, setVisiblePosts] = useState(30);
   const navigateTo = useNavigate();
 
   useEffect(() => {
-    getAllPosts(setProducts, searchKey);
-  }, [searchKey])
+    getAllPosts(setProducts, searchKey, visiblePosts);
+  }, [searchKey, visiblePosts])
+
+  useEffect(() => {
+    getFavourited(setIsFavourited)
+  }, [])
   
+  const loadMore = () => {setVisiblePosts(prev => prev+20)}
 
   return (
     <div className="postParentDiv">
@@ -26,11 +34,11 @@ function Posts() {
           <span>Fresh recommendations</span>
         </div>
         {products.length > 0 ?
-        <PostCards products={products} /> :
+        <PostCards products={products} isFavourited={isFavourited} setIsFavourited={setIsFavourited} /> :
         <div>No products found</div> }
       </div>
       <div className='loadBtnDiv'>
-        <button mx-auto>Load More</button>
+        <button onClick={loadMore}>Load More</button>
       </div>
     </div>
   );

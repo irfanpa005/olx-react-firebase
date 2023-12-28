@@ -3,6 +3,7 @@ import { firebaseApp } from '../../firebase/firebaseConfig';
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import './View.css';
 import { PostContext } from '../../context/PostContext';
+import Featured from '../../assets/Featured';
 
 function View() {
   const [userDetails, setUserDetails] = useState();
@@ -34,6 +35,7 @@ function View() {
     <div className="viewParentDiv">
       {postDetails && 
         <div className="imageShowDiv">
+          {postDetails.featured ? <Featured style={{ alignSelf: 'flex-start' }}></Featured> : <div></div>}
           <img
             src={postDetails.imageUrl}
             alt=""

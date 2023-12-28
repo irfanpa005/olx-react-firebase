@@ -1,0 +1,28 @@
+.profContainer{
+    width: 100%;
+    z-index: 5;
+}
+
+.profUserDetail{
+    padding: 10px 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    overflow: hidden;
+}
+
+.profUserDetail> p{
+    margin: 0;
+    padding: 0;
+    margin-inline-start: 5px;
+    font-size: large;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+.line {
+    margin: 0;
+    padding: 0;
+}
+

@@ -25,7 +25,6 @@ function App() {
     onAuthStateChanged(auth, (userLogged) => {
       if (userLogged) {
         setUser(userLogged)
-        console.log(user)
       } 
     });
   })

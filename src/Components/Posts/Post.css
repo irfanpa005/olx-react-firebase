@@ -1,6 +1,6 @@
 .postParentDiv {
   width: 100%;
-  max-width: 90%;
+  max-width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -29,65 +29,119 @@
   color: #002f34;
 }
 
-.recommendations .cards {
-  display: flex;
-}
-
-.moreView .cards {
-  white-space: nowrap;
-  overflow-x: scroll;
-  overflow-y: hidden;
-}
-
-.card {
-  margin-right: 15px;
-  padding: 10px;
-  max-width: 222px;
-  width: 222px;
-  height: 270px;
-  display: inline-block;
-  cursor: pointer;
-  border: 1px solid rgb(146, 141, 141);
-  background-color: white;
-  border-radius: 8px;
+.cardParent {
   position: relative;
 }
 
-.card .favorite {
+.card {
   width: 100%;
+  margin: 5px 5px;
+  padding: 10px 5px;
+  height: 296px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  cursor: pointer;
+  border: 1px solid rgb(192, 186, 186);
+  background-color: white;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
 }
+
+.featured {
+  position: absolute;
+  top: 10px;
+  background-color: blue;
+}
+
 
 .card .image {
   display: flex;
+  height: 160px;
+  width: 100%;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 }
 
 .card .image img {
-  height: 100px;
   max-width: 100%;
   max-height: 100%;
   min-height: 100%;
-  text-align: center;
+  object-fit: cover;
 }
+
+.card .content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 5px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(122, 120, 120);
+}
+
+.card .content > p {
+  margin-block-start:0;
+  margin-block-end:0;
+  margin: 0;
+  padding: 0;
+  
+}
+
 .card .content .rate {
   margin-top: 10px;
   font-size: larger;
   font-weight: bold;
+  margin: 0;
+  padding: 0;
 }
-.card .content .kilometer {
+.card .content .category {
   font-size: medium;
+  margin: 0;
+  padding: 0;
 }
 .card .content .name {
-  font-size: small;
+  font-size: medium;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
 }
 .card .date {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   font-size: small;
+  white-space: nowrap; 
+  overflow: hidden;
+  padding: 0px 5px;
 }
+
+.card .date .location {
+
+  text-overflow: ellipsis; 
+  overflow: hidden;
+}
+
+.heartIcon{ 
+  z-index: 5;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+ }
+
+.heartIcon::before {
+  content: '';
+  position: absolute;
+  top: -3px; /* Adjust positioning */
+  right: -3px; /* Adjust positioning */
+  width: 30px; /* Adjust width */
+  height: 30px; /* Adjust height */
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%; /* Makes the element circular */
+  z-index: -1; /* Behind the heart icon */
+}
+
+
+ .heartIcon:hover{ 
+  cursor: pointer;
+ }
 
 .recommendations {
   margin: 16px 16px 24px;
@@ -113,4 +167,9 @@
   font-size: 0.9rem;
   font-weight: bold;
   border-radius: 10px;
+}
+
+.loadBtnDiv > button:hover{
+  cursor: pointer;
+  background-color: rgb(239, 232, 232);
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default function Arrow() {
+export default function Arrow({onClick}) {
     return ( <svg
         width="24px"
         height="24px"
@@ -9,6 +9,7 @@ export default function Arrow() {
         data-aut-id="icon"
         className
         fillRule="evenodd"
+        onClick={onClick}
       >
         <path
           className="rui-77aaa"

@@ -4,6 +4,7 @@ import './Login.css';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase/firebaseConfig';
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -61,7 +62,7 @@ function Login() {
           <br />
           <button>Login</button>
         </form>
-        <a>Signup</a>
+        <a onClick={() => {navigateTo('/signup')}}>Signup</a>
       </div>
     </div>
   );

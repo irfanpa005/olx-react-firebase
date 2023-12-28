@@ -1,13 +1,15 @@
 import { firebaseApp } from "../../firebase/firebaseConfig";
-import { query, collection, getDocs, getFirestore, where, orderBy, limit } from "firebase/firestore";
+import { query, collection, getDocs, getFirestore, orderBy, limit, where, updateDoc, doc, getDoc  } from "firebase/firestore";
 
 const db = getFirestore(firebaseApp);
 const productRef = collection(db, "products");
+const userRef = collection(db, "users");
+let userId = localStorage.getItem("userInfo")
 
-export const getAllPosts = async (setProducts, searchKey) => {
+export const getAllPosts = async (setProducts, searchKey, visiblePosts) => {
   try {
 
-    const posts = query(collection(db, "products"), orderBy("createdAt","desc"),limit(30));
+    const posts = query(collection(db, "products"), orderBy("createdAt","desc"), limit(visiblePosts));
     const snapshot = await getDocs(posts);
     let allProducts = snapshot.docs.map((product) => ({
       ...product.data(),
@@ -27,3 +29,44 @@ export const getAllPosts = async (setProducts, searchKey) => {
     console.error("Error fetching searched posts: ", error);
   }
 };
+
+
+export const getFavourited = async (setIsFavourited) => {
+
+  try {
+    const querySnapshot = await getDocs(query(userRef, where("id", "==", userId)));
+    if (!querySnapshot.empty) {
+      const userData = querySnapshot.docs[0].data();
+      const currentFavorites = userData.favourited || [];
+      setIsFavourited(currentFavorites) 
+    } else {
+      console.log("User document does not exist.");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export const setFavourited = async (productId) => {
+  try {
+    const querySnapshot = await getDocs(query(userRef, where("id", "==", userId)));
+    if (!querySnapshot.empty) {
+        const doc = querySnapshot.docs[0]; 
+        const userDataRef = doc.ref;
+        const currentFavorites = doc.data().favourited || [];
+      
+      if (!currentFavorites.includes(productId)) {
+        const updatedFavorites = [...currentFavorites, productId];
+        await updateDoc(userDataRef, { favourited: updatedFavorites });
+      } else {
+        const updatedFavorites = currentFavorites.filter((id) => id !== productId);
+        await updateDoc(userDataRef, { favourited: updatedFavorites });
+      }
+    } else {
+      console.log("User document does not exist.");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}

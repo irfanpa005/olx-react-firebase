@@ -30,10 +30,11 @@ export default function Signup() {
         addDoc(userCollectionRef, {
           id:user.uid,
           username:username,
-          phone:phoneNo
-
+          phone:phoneNo,
+          favourited:[]
         }).then(() => {
-          navigateTo("/login")
+          navigateTo("/login");
+          window.location.reload(); 
         })
       });
       // ...
@@ -45,11 +46,6 @@ export default function Signup() {
     });
 
   }
-
-  useEffect(() => {
-    console.log(database)
-  }, [])
-  
 
 
   return (
@@ -108,7 +104,7 @@ export default function Signup() {
           <br />
           <button>Signup</button>
         </form>
-        <a>Login</a>
+        <a onClick={() => {navigateTo('/login')}}>Login</a>
       </div>
     </div>
   );
