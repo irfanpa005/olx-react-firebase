@@ -17,13 +17,14 @@ function Posts() {
   const navigateTo = useNavigate();
 
   useEffect(() => {
-    getAllPosts(setProducts, searchKey, visiblePosts);
-  }, [searchKey, visiblePosts])
-
-  useEffect(() => {
     getFavourited(setIsFavourited)
   }, [])
   
+  useEffect(() => {
+    getAllPosts(setProducts, searchKey, visiblePosts);
+  }, [searchKey, visiblePosts])
+
+
   const loadMore = () => {setVisiblePosts(prev => prev+20)}
 
   return (
@@ -37,9 +38,11 @@ function Posts() {
         <PostCards products={products} isFavourited={isFavourited} setIsFavourited={setIsFavourited} /> :
         <div>No products found</div> }
       </div>
-      <div className='loadBtnDiv'>
-        <button onClick={loadMore}>Load More</button>
-      </div>
+      {products.length > 20 &&
+        <div className='loadBtnDiv'>
+          <button onClick={loadMore}>Load More</button>
+        </div>
+      }
     </div>
   );
 }

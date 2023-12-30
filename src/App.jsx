@@ -9,13 +9,14 @@ import {
 } from "react-router-dom";
 import LoginPage from './Pages/Login'
 import CreatePage from './Pages/Create'
+import ViewPost from './Pages/ViewPost'
+import PrivateRoute from './utils/PrivateRoute'
+import ErrorPage from './Pages/ErrorPage'
+import Favourites from './Pages/Favourites';
 import { AuthContext } from './context/Context'
 import { auth } from './firebase/firebaseConfig'
 import { onAuthStateChanged } from "firebase/auth";
-import ViewPost from './Pages/ViewPost'
 import { Post } from './context/PostContext'
-import PrivateRoute from './utils/PrivateRoute'
-import ErrorPage from './Pages/ErrorPage'
 import { SearchFunction } from './context/SearchContext';
 
 function App() {
@@ -57,6 +58,10 @@ function App() {
         {
           path: "/create",
           element: <CreatePage />,
+        },
+        {
+          path: "/favourites",
+          element: <Favourites />,
         },
       ]
     },

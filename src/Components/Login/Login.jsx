@@ -6,7 +6,7 @@ import { auth } from '../../firebase/firebaseConfig';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
-function Login() {
+function Login({setLoginModal,setRegisterModal}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigateTo = useNavigate();
@@ -17,18 +17,20 @@ function Login() {
       .then((userCredential) => {
         localStorage.setItem("refreshToken",userCredential.user.refreshToken)
         localStorage.setItem("userInfo",userCredential.user.uid)
-        // Signed in 
+        setLoginModal(false)
         navigateTo('/');
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         alert(errorMessage)
       });
-
   }
 
+  const handleSignUp = () => {
+    setLoginModal(false)
+    setRegisterModal(true)
+  }
 
   return (
     <div>
@@ -62,7 +64,8 @@ function Login() {
           <br />
           <button>Login</button>
         </form>
-        <a onClick={() => {navigateTo('/signup')}}>Signup</a>
+        <a onClick={handleSignUp}>Signup</a>
+        <p className='closeX' onClick={() => {setLoginModal(false)}}>X</p>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import {  collection, addDoc, getFirestore} from "firebase/firestore";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-export default function Signup() {
+export default function Signup({setLoginModal,setRegisterModal}) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNo, setPhoneNo] = useState('');
@@ -104,7 +104,8 @@ export default function Signup() {
           <br />
           <button>Signup</button>
         </form>
-        <a onClick={() => {navigateTo('/login')}}>Login</a>
+        <a onClick={() => {setRegisterModal(false); setLoginModal(true)}}>Login</a>
+        <p className='closeX' onClick={() => {setRegisterModal(false)}}>X</p>
       </div>
     </div>
   );

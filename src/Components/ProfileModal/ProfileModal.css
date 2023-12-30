@@ -3,7 +3,7 @@
     z-index: 5;
 }
 
-.profUserDetail{
+.profUserDetail, .profUserMenu{
     padding: 10px 10px;
     display: flex;
     justify-content: start;
@@ -11,7 +11,7 @@
     overflow: hidden;
 }
 
-.profUserDetail> p{
+.profModalTitle{
     margin: 0;
     padding: 0;
     margin-inline-start: 5px;
@@ -20,6 +20,11 @@
     overflow: hidden; 
     text-overflow: ellipsis; 
 }
+
+.profModalTitle:hover{
+    cursor: pointer;
+}
+
 
 .line {
     margin: 0;

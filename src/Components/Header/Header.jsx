@@ -7,34 +7,25 @@ import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
 import { AuthContext } from '../../context/Context';
 import { SearchContext } from '../../context/SearchContext';
-import { signOut } from "firebase/auth";
-import { auth } from '../../firebase/firebaseConfig';
 import { useNavigate } from "react-router-dom";
 import ChatIcon from '../../assets/ChatIcon';
 import Notification from '../../assets/Notification';
 import CircleUser from '../../assets/CircleUser';
 import ProfileModal from '../ProfileModal/ProfileModal';
+import Login from '../Login/Login';
+import Signup from '../Signup/Signup';
 
 function Header() {
   const {user, setUser} = useContext(AuthContext);
   const [profileModal, setProfileModal] = useState(false)
   const [searchWord, setSearchWord] = useState("")
   const {searchKey, setSearchKey} = useContext(SearchContext);
+  const [loginModal, setLoginModal] = useState(false)
+  const [registerModal, setRegisterModal] = useState(false)
   const navigateTo = useNavigate();
 
   const showProfileSection = () => {
-    console.log("profile sec");
     setProfileModal(!profileModal)
-  }
-
-  const handleSignOut = () => {
-    signOut(auth).then(() => {
-      localStorage.removeItem("refreshToken")
-      localStorage.removeItem("userInfo")
-      navigateTo('/login')
-    }).catch((error) => {
-      console.log(error)
-    });
   }
 
   const handleSell= () => {
@@ -45,10 +36,14 @@ function Header() {
     setSearchKey(searchWord)
   }
 
+  const handleLogin = () => {
+    setLoginModal(true)
+  }
+
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
-        <div>
+        <div onClick={() => {navigateTo('/')}} className='olxLogo'>
           <OlxLogo></OlxLogo>
         </div>
         <div className="placeSearch">
@@ -73,21 +68,18 @@ function Header() {
           <span> ENGLISH </span>
           <Arrow></Arrow>
         </div>
-        {/* <div className="loginPage" >
-          <span onClick={() => {navigateTo('/login')}}>{user ? `Welcome,${user.displayName}` : "Login"}</span>
-          <hr />
-        </div>
-        { user && <span className="signOutButton" onClick={handleSignOut}>Logout</span> } */}
         <div>
           <ChatIcon></ChatIcon>
         </div>
         <div>
           <Notification></Notification>
         </div>
+        {user ?
         <div className="language">
           <CircleUser></CircleUser>
           <Arrow onClick={showProfileSection} />
-        </div>
+        </div> : <span onClick={handleLogin} className='login'>Login</span>
+        }
         <div className="sellMenu" onClick={handleSell}>
           <SellButton></SellButton>
           <div className="sellMenuContent">
@@ -99,6 +91,18 @@ function Header() {
       {profileModal &&
       <div className='profileModal'>
         <ProfileModal></ProfileModal>
+      </div>}
+      {loginModal &&
+      <div className='loginModal'>
+        <div className='loginContent'>
+          <Login setLoginModal={setLoginModal} setRegisterModal={setRegisterModal}></Login>
+        </div>
+      </div>}
+      {registerModal &&
+      <div className='loginModal'>
+        <div className='loginContent'>
+          <Signup setLoginModal={setLoginModal} setRegisterModal={setRegisterModal}></Signup>
+        </div>
       </div>}
     </div>
   );
