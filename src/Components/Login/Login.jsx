@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react';
-import Logo from '../../olx-logo.png';
+import Logo from '../../OLXLogo-black.png';
 import './Login.css';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase/firebaseConfig';
 import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
 
 function Login({setLoginModal,setRegisterModal}) {
   const [email, setEmail] = useState('');
@@ -35,7 +34,7 @@ function Login({setLoginModal,setRegisterModal}) {
   return (
     <div>
       <div className="loginParentDiv">
-        <img width="200px" height="200px" src={Logo}></img>
+        <img width="200px" height="100px" src={Logo} style={{margin:"30px 20px"}}></img>
         <form onSubmit={handleLogin}>
           <label htmlFor="email">Email</label>
           <br />

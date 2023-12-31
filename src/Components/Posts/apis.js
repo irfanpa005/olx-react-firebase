@@ -1,14 +1,13 @@
 import { firebaseApp } from "../../firebase/firebaseConfig";
 import { query, collection, getDocs, getFirestore, orderBy, limit, where, updateDoc, doc, getDoc  } from "firebase/firestore";
 
+
 const db = getFirestore(firebaseApp);
 const productRef = collection(db, "products");
 const userRef = collection(db, "users");
-let userId = localStorage.getItem("userInfo")
 
 export const getAllPosts = async (setProducts, searchKey, visiblePosts) => {
   try {
-
     const posts = query(collection(db, "products"), orderBy("createdAt","desc"), limit(visiblePosts));
     const snapshot = await getDocs(posts);
     let allProducts = snapshot.docs.map((product) => ({
@@ -32,7 +31,7 @@ export const getAllPosts = async (setProducts, searchKey, visiblePosts) => {
 
 
 export const getFavourited = async (setIsFavourited) => {
-
+  let userId = localStorage.getItem("userInfo")
   try {
     const querySnapshot = await getDocs(query(userRef, where("id", "==", userId)));
     if (!querySnapshot.empty) {
@@ -47,8 +46,8 @@ export const getFavourited = async (setIsFavourited) => {
   }
 }
 
-
 export const setFavourited = async (productId) => {
+  let userId = localStorage.getItem("userInfo")
   try {
     const querySnapshot = await getDocs(query(userRef, where("id", "==", userId)));
     if (!querySnapshot.empty) {

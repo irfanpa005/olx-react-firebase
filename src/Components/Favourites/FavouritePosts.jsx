@@ -3,14 +3,19 @@ import './FavouritePosts.css'
 import { getAllPosts } from '../Posts/apis'
 import { getFavourited } from '../Posts/apis'
 import PostCards from '../Posts/PostCards'
+import Loader from '../../assets/Loader'
 
 function FavouritePosts() {
   const [products, setProducts] = useState([])
   const [isFavourited, setIsFavourited] = useState([])
   const [favoritedPosts, setFavoritedPosts] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getAllPosts(setProducts, null);
+    setTimeout(() => {
+      setLoading(false)
+    },1200)
   }, [])
 
   useEffect(() => {
@@ -29,9 +34,17 @@ function FavouritePosts() {
           <div className="heading">
             <span>My ADS</span>
           </div>
-          {products.length > 0 ?
-          <PostCards products={favoritedPosts} isFavourited={isFavourited} setIsFavourited={setIsFavourited} /> :
-          <div>No products found</div> }
+          {loading ? (
+          <Loader />
+        ) : favoritedPosts.length > 0 ? (
+          <PostCards
+            products={favoritedPosts}
+            isFavourited={isFavourited}
+            setIsFavourited={setIsFavourited}
+          />
+        ) : (
+          <div>No products found</div>
+        )}
         </div>
       </div>
     );

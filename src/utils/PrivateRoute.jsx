@@ -6,7 +6,7 @@ function PrivateRoute() {
   let refreshToken = localStorage.getItem("refreshToken")
   let userInfo = localStorage.getItem("userInfo")
 
-  return refreshToken && userInfo ? <Outlet /> : <Navigate to={"/login"} />;
+  return refreshToken && userInfo ? <Outlet /> : <Navigate to={"/"} />;
 }
 
 export default PrivateRoute;

@@ -6,6 +6,10 @@
     border-radius: 6px;
     background-color: whitesmoke;
   }
+
+  .loginParentDiv > form > input{
+    width: 100%;
+  }
   
   .loginParentDiv .input {
     border-top-color: transparent;

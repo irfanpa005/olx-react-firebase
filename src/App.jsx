@@ -1,13 +1,11 @@
 import React, {useEffect, useContext} from 'react'
 import './App.css'
 import Home from './Pages/Home'
-import Signup from './Pages/Signup'
 import {
   RouterProvider,
   createBrowserRouter,
   Navigate
 } from "react-router-dom";
-import LoginPage from './Pages/Login'
 import CreatePage from './Pages/Create'
 import ViewPost from './Pages/ViewPost'
 import PrivateRoute from './utils/PrivateRoute'
@@ -26,7 +24,9 @@ function App() {
     onAuthStateChanged(auth, (userLogged) => {
       if (userLogged) {
         setUser(userLogged)
-      } 
+      } else {
+        setUser(null); 
+      }
     });
   })
 
@@ -38,14 +38,6 @@ function App() {
     {
       path: "*",
       element: <ErrorPage />,
-    },
-    {
-      path: "/signup",
-      element: <Signup />,
-    },
-    {
-      path: "/login",
-      element: <LoginPage />,
     },
     {
       path: "/view",

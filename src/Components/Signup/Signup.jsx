@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Logo from '../../olx-logo.png';
+import Logo from '../../OLXLogo-black.png';
 import './Signup.css';
 import { useContext } from 'react';
 import { FirebaseContext } from '../../context/Context';
@@ -13,7 +13,6 @@ export default function Signup({setLoginModal,setRegisterModal}) {
   const [email, setEmail] = useState('');
   const [phoneNo, setPhoneNo] = useState('');
   const [password, setPassword] = useState('');
-
   const {firebaseApp} = useContext(FirebaseContext);
   const database = getFirestore(firebaseApp);
   const userCollectionRef = collection(database,'users');
@@ -33,8 +32,7 @@ export default function Signup({setLoginModal,setRegisterModal}) {
           phone:phoneNo,
           favourited:[]
         }).then(() => {
-          navigateTo("/login");
-          window.location.reload(); 
+          setRegisterModal(false)
         })
       });
       // ...
@@ -51,7 +49,7 @@ export default function Signup({setLoginModal,setRegisterModal}) {
   return (
     <div>
       <div className="signupParentDiv">
-        <img width="200px" height="200px" src={Logo}></img>
+        <img width="200px" height="100px" src={Logo} style={{margin:"30px 20px"}}></img>
         <form onSubmit={handleSubmit}>
           <label htmlFor="userName">Username</label>
           <br />
