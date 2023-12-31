@@ -4,12 +4,13 @@ import './Login.css';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase/firebaseConfig';
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 function Login({setLoginModal,setRegisterModal}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigateTo = useNavigate();
-  
+
   const handleLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
@@ -22,7 +23,7 @@ function Login({setLoginModal,setRegisterModal}) {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorMessage)
+        toast.error(errorMessage);
       });
   }
 

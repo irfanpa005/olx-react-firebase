@@ -10,7 +10,6 @@ import { AuthContext } from "../../context/Context";
 import Loader from "../../assets/Loader";
 import { FallingLines } from "react-loader-spinner";
 
-
 function Posts() {
   const [products, setProducts] = useState([]);
   const [isFavourited, setIsFavourited] = useState([]);

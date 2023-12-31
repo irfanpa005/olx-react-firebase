@@ -7,6 +7,7 @@ import { auth } from '../../firebase/firebaseConfig';
 import {  collection, addDoc, getFirestore} from "firebase/firestore"; 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 export default function Signup({setLoginModal,setRegisterModal}) {
   const [username, setUsername] = useState('');
@@ -25,6 +26,7 @@ export default function Signup({setLoginModal,setRegisterModal}) {
     .then((userCredential) => {
       // Signed up 
       const user = userCredential.user;
+      toast.success("Registration Succesfull")
       updateProfile(user,{displayName:username}).then(() => {
         addDoc(userCollectionRef, {
           id:user.uid,
@@ -40,7 +42,7 @@ export default function Signup({setLoginModal,setRegisterModal}) {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorCode, errorMessage); // Log the error details
+      toast.error(errorMessage)// Log the error details
     });
 
   }

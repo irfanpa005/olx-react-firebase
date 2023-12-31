@@ -14,6 +14,7 @@ import CircleUser from "../../assets/CircleUser";
 import ProfileModal from "../ProfileModal/ProfileModal";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
+import { Toaster } from 'react-hot-toast';
 
 function Header() {
   const { user, setUser } = useContext(AuthContext);
@@ -24,7 +25,7 @@ function Header() {
   const [loginModal, setLoginModal] = useState(false);
   const [registerModal, setRegisterModal] = useState(false);
   const navigateTo = useNavigate();
-
+  
   const showProfileSection = () => {
     setProfileModal(!profileModal);
   };
@@ -127,6 +128,7 @@ function Header() {
           </div>
         </div>
       )}
+      <Toaster position='top-center'/>
     </div>
   );
 }

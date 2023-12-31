@@ -42,8 +42,6 @@
   height: 48px;
   border: 2px solid #002f34;
   border-radius: 4px;
-  display: flex;
-  align-items: center;
   background-color: white;
   display: flex;
   align-items: center;
@@ -171,6 +169,8 @@
 .sellMenu .right {
   fill: #3a77ff;
 }
+
+
 .sellMenu .sellMenuContent {
   display: flex;
   position: absolute;
@@ -181,6 +181,7 @@
   font-weight: 700;
   letter-spacing: 0.5px;
   color: #002f34;
+  align-items: center;
 }
 
 .signOutButton:hover{
